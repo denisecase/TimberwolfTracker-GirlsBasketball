@@ -1,4 +1,4 @@
-/* *
+/* * MODIFIED FROM BEARCAT BUDDY***************************************
  * This sample demonstrates handling intents from an Alexa skill using the Alexa Skills Kit SDK (v2).
  * Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
  * session persistence, api calls, and more.
@@ -6,7 +6,7 @@
 const Alexa = require('ask-sdk-core');
 
 // constants for our custom skill
-const skillName = 'Timberwolf Tracker - Girls basketball';
+const skillName = 'Timberwolf Tracker - Girls Basketball';
 const gender = 'Girls';
 const sport = 'Basketball';
 const home = 'home';
@@ -17,8 +17,7 @@ const intentText2 = 'how many games remaining';
 const helpText = `Say when is the next game or how many games remaining? Say stop or cancel to exit.`;
 const doneText = 'Go Timberwolves - Goodbye!';
 const errorText = "Sorry, I could not understand. Please try again.";
-//const victoryText = "Congratulations Timberwolves - 2021 Division 2 National Champions!";
-const victoryText = "Congratulations Timberwolves!";
+const victoryText = ""; // "Congratulations Timberwolves - 2021 Division 2 National Champions!";
 
 // games
 const games = require('./games');
@@ -90,8 +89,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Welcome, you can say when is the next home game or how many games remaining?';
-
+        const speakOutput = `Welcome from ${skillName}. Say ${intentText1} or ${intentText2}`;
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -180,6 +178,7 @@ const CancelAndStopIntentHandler = {
             .getResponse();
     }
 };
+
 /* *
  * FallbackIntent triggers when a customer says something that doesn’t map to any intents in your skill
  * It must also be defined in the language model (if the locale supports it)
@@ -199,6 +198,7 @@ const FallbackIntentHandler = {
             .getResponse();
     }
 };
+
 /* *
  * SessionEndedRequest notifies that a session was ended. This handler will be triggered when a currently open 
  * session is closed for one of the following reasons: 1) The user says "exit" or "quit". 2) The user does not 
@@ -214,6 +214,7 @@ const SessionEndedRequestHandler = {
         return handlerInput.responseBuilder.getResponse(); // notice we send an empty response
     }
 };
+
 /* *
  * The intent reflector is used for interaction model testing and debugging.
  * It will simply repeat the intent the user said. You can create custom handlers for your intents 
@@ -233,6 +234,7 @@ const IntentReflectorHandler = {
             .getResponse();
     }
 };
+
 /**
  * Generic error handling to capture any syntax or routing errors. If you receive an error
  * stating the request handler chain is not found, you have not implemented a handler for
@@ -246,7 +248,6 @@ const ErrorHandler = {
         // const speakOutput = `Sorry, I had trouble doing what you asked. Please try again.`;
         const speakOutput = errorText;
         console.log(`~~~~ Error handled: ${JSON.stringify(error)}`);
-
         return handlerInput.responseBuilder
             .speak(speakOutput)
             .reprompt(speakOutput)
@@ -269,7 +270,8 @@ exports.handler = Alexa.SkillBuilders.custom()
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
         SessionEndedRequestHandler,
-        IntentReflectorHandler)
+        IntentReflectorHandler, // make sure IntentReflectorHandler is last
+    )
     .addErrorHandlers(
         ErrorHandler,
     )
