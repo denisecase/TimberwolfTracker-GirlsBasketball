@@ -403,7 +403,9 @@
                 "backgroundImageSource": "${payload.headlineTemplateData.properties.backgroundImage.sources[0].url}",
                 "backgroundColorOverlay": false,
                 "speech": "${payload.headlineTemplateData.properties.welcomeSpeech}",
-                "theme": "light"
+                "headerTitle": "${payload.headlineTemplateData.properties.textContent.headerTitle.text}",
+                "headerSubtitle": "${payload.headlineTemplateData.properties.textContent.headerSubtitle.text}"
+     
             }
         ]
     },
