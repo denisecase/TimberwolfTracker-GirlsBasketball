@@ -405,7 +405,6 @@
                 "speech": "${payload.headlineTemplateData.properties.welcomeSpeech}",
                 "headerTitle": "${payload.headlineTemplateData.properties.textContent.headerTitle.text}",
                 "headerSubtitle": "${payload.headlineTemplateData.properties.textContent.headerSubtitle.text}"
-     
             }
         ]
     },
